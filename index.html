@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script src="nnkd-data.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap">
+<style>body{margin:0;background:#fff;font-family:Inter,sans-serif}a{color:#2f78bd}a:hover{color:#1f5f9c}input:focus{outline:2px solid #4c9ad0;outline-offset:0}</style>
+</helmet>
+<div style="display:flex;height:100vh;font-family:Inter,sans-serif;color:#1f2937;font-size:14px;background:#fff">
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column">
+    <div style="height:62px;flex:none;border-bottom:1px solid #e5e7eb;display:flex;align-items:center;justify-content:space-between;padding:0 24px">
+      <span style="font-weight:700;font-size:24px;letter-spacing:-.02em;color:#1d86a8">baokim</span>
+      <div style="display:flex;align-items:center;gap:10px"><div style="width:28px;height:28px;border-radius:4px;background:#111;color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center">SA</div><div style="line-height:1.2"><div style="font-size:12px;font-weight:500">Sale phụ trách</div><div style="font:11px 'JetBrains Mono',monospace;color:#6b7280">sale@baokim.vn</div></div></div>
+    </div>
+    <div style="flex:1;min-height:0;display:flex;flex-direction:column">
+      <div style="padding:14px 20px 16px;display:flex;gap:16px;align-items:center;border-bottom:1px solid #e5e7eb;flex:none">
+        <div style="width:32px;height:32px;border:1px solid #d5dae1;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#374151">←</div>
+        <div><div style="font-size:18px;font-weight:600;letter-spacing:-.005em">CÔNG TY TNHH ABC</div>
+        <div style="font-size:12px;color:#6b7280;margin-top:3px"><span style="font:500 12px 'JetBrains Mono',monospace;color:#2f78bd">MRC-00000</span> &nbsp;·&nbsp; Tổ chức / Doanh nghiệp · dữ liệu mẫu</div></div>
+      </div>
+      <div ref="{{ mainRef }}" style="flex:1;min-height:0;overflow:auto;position:relative;scroll-behavior:smooth">
+        <div style="margin:16px 20px;border:1px solid #e5e7eb;border-radius:4px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))">
+          
+          
+          
+        </div>
+        <div style="display:flex;gap:32px;padding:0 20px;border-top:1px solid #e5e7eb;border-bottom:1px solid #e5e7eb;font-size:14px;font-weight:600;color:#6b7280">
+          
+          
+          
+        </div>
+        <div style="display:flex;gap:20px;padding:20px;align-items:flex-start;flex-wrap:wrap">
+          <div style="width:240px;flex:none;border:1px solid #e5e7eb;border-radius:4px;overflow:hidden;position:sticky;top:0">
+            <div style="padding:12px 16px;background:#f9fafb;border-bottom:1px solid #e5e7eb;font-size:12px;font-weight:700;letter-spacing:.1em">MỤC THU THẬP</div>
+            <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="6">
+              <div onClick="{{ n.go }}" style="cursor:pointer;padding:11px 16px;border-bottom:1px solid #f0f1f3;background:{{ n.bg }}" style-hover="background:#f3f7fb">
+                <div style="font-weight:500;font-size:13px;line-height:1.35">{{ n.title }}</div>
+                <div style="display:flex;gap:8px;align-items:center;font-size:11px;color:#6b7280;margin-top:6px"><div style="flex:1;height:4px;background:#e5e7eb;border-radius:4px"><div style="height:4px;border-radius:4px;background:#2f78bd;width:{{ n.pct }}"></div></div><span style="font-family:'JetBrains Mono',monospace">{{ n.stat }}</span></div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="flex:1;min-width:320px;display:flex;flex-direction:column;gap:20px">
+            <div style="display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+              <div style="font-size:13px;line-height:1.5;color:#374151;max-width:520px">Nhập đủ trường bắt buộc để chuyển KSNB theo luồng chính. Trường chưa thu thập được có thể đặt <b>Bypass</b>; minh chứng có thể để trống.</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap"><button style="font:600 13px Inter,sans-serif;padding:8px 14px;border-radius:4px;border:1px solid #d5dae1;background:#fff;color:#1f2937;cursor:pointer" onClick="{{ bulkLater }}">Trống → Thu thập sau</button><button style="font:600 13px Inter,sans-serif;padding:8px 14px;border-radius:4px;border:1px solid #d5dae1;background:#fff;color:#1f2937;cursor:pointer" onClick="{{ bulkNo }}">Trống → Không thể thu thập</button></div>
+            </div>
+            <sc-for list="{{ sections }}" as="s" hint-placeholder-count="3">
+              <div id="{{ s.domId }}" style="border:1px solid #e5e7eb;border-radius:4px;overflow:hidden">
+                <div style="padding:12px 16px;background:#f9fafb;border-bottom:1px solid #e5e7eb;display:flex;gap:12px;align-items:baseline;flex-wrap:wrap"><span style="font-size:12px;font-weight:700;letter-spacing:.08em">{{ s.title }}</span></div>
+                <sc-for list="{{ s.fields }}" as="f" hint-placeholder-count="3">
+                  <div>
+                    <sc-if value="{{ f.showGroup }}" hint-placeholder-val="{{ false }}"><div style="padding:10px 16px;font-size:12px;font-weight:600;color:#374151;background:#fff;border-bottom:1px solid #eef0f2">{{ f.group }}</div></sc-if>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px 20px;padding:10px 16px;border-bottom:1px solid #eef0f2;align-items:start;background:{{ f.rowBg }}">
+                      <div style="flex:1 1 {{ f.labelBasis }};min-width:0;font-size:13px;line-height:1.45;color:#6b7280;padding-top:8px">{{ f.label }}<sc-if value="{{ f.req }}" hint-placeholder-val="{{ true }}"><span style="color:#dc2626"> *</span></sc-if></div>
+                      <div style="flex:2 1 {{ f.inputBasis }};min-width:0;opacity:{{ f.inputOpacity }}">
+                        <sc-if value="{{ f.isText }}" hint-placeholder-val="{{ false }}"><input type="text" value="{{ f.value }}" onChange="{{ f.onText }}" disabled="{{ f.bypassed }}" placeholder="{{ f.ph }}" style="font:14px Inter,sans-serif;padding:8px 10px;border:1px solid #d5dae1;border-radius:4px;background:#fff;color:#1f2937;width:100%;box-sizing:border-box"></sc-if>
+                        <sc-if value="{{ f.isDate }}" hint-placeholder-val="{{ false }}"><input type="date" value="{{ f.value }}" onChange="{{ f.onText }}" disabled="{{ f.bypassed }}" style="font:14px Inter,sans-serif;padding:8px 10px;border:1px solid #d5dae1;border-radius:4px;background:#fff;color:#1f2937;width:100%;box-sizing:border-box;font-family:'JetBrains Mono',monospace"></sc-if>
+                        <sc-if value="{{ f.isFile }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding-top:2px"><button style="font:600 13px Inter,sans-serif;padding:8px 14px;border-radius:4px;border:1px solid #d5dae1;background:#fff;color:#1f2937;cursor:pointer" onClick="{{ f.onFile }}" disabled="{{ f.bypassed }}">{{ f.fileBtn }}</button><span style="font:12px 'JetBrains Mono',monospace;color:#374151">{{ f.value }}</span></div></sc-if>
+                        <sc-if value="{{ f.isList }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:10px">
+<sc-if value="{{ f.two }}" hint-placeholder-val="{{ false }}"><div style="border:1px solid #e5e7eb;border-radius:4px;overflow:hidden"><div>
+<div style="display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1.3fr) minmax(0,1fr) 36px;gap:10px;align-items:start;padding:8px 12px;background:#f9fafb;border-bottom:1px solid #e5e7eb;font-size:11px;font-weight:600;letter-spacing:.06em;color:#6b7280;align-items:center"><span>NNKD CẤP 4</span><span>TÊN GIẤY PHÉP CON</span><span>GIẤY PHÉP CON</span><span></span></div>
+<sc-for list="{{ f.items }}" as="it" hint-placeholder-count="1"><div style="display:grid;grid-template-columns:minmax(0,1.8fr) minmax(0,1.3fr) minmax(0,1fr) 36px;gap:10px;align-items:start;padding:10px 12px;border-bottom:1px solid #eef0f2"><div style="display:flex;flex-direction:column;gap:6px;min-width:0"><input type="text" list="nnkd-dl" value="{{ it.a }}" onChange="{{ it.onA }}" disabled="{{ f.bypassed }}" placeholder="Chọn / gõ mã hoặc tên NNKD cấp 4" style="font:14px Inter,sans-serif;padding:8px 10px;border:1px solid #d5dae1;border-radius:4px;background:#fff;color:#1f2937;box-sizing:border-box;width:100%;min-width:0;font-weight:500"><input type="text" value="{{ it.b }}" onChange="{{ it.onB }}" disabled="{{ f.bypassed }}" placeholder="{{ f.ph2 }}" style="color:#6b7280;font:13px Inter,sans-serif;padding:6px 10px;border:1px solid #e5e7eb;border-radius:4px;background:#f9fafb;box-sizing:border-box;width:100%;min-width:0"></div><select title="{{ it.c }}" value="{{ it.c }}" onChange="{{ it.onC }}" disabled="{{ f.bypassed }}" style="font:14px Inter,sans-serif;padding:8px 10px;border:1px solid #d5dae1;border-radius:4px;background:#fff;color:#1f2937;box-sizing:border-box;width:100%;min-width:0;text-overflow:ellipsis"><sc-for list="{{ it.licOpts }}" as="o" hint-placeholder-count="1"><option value="{{ o.v }}">{{ o.label }}</option></sc-for></select><div style="display:flex;flex-direction:column;gap:4px;align-items:flex-start;padding-top:8px;min-width:0"><sc-for list="{{ it.files }}" as="fl" hint-placeholder-count="1"><div style="display:flex;gap:8px;align-items:center;max-width:100%;min-width:0"><span style-hover="opacity:.7" onClick="{{ fl.view }}" style="cursor:pointer;font:12px 'JetBrains Mono',monospace;color:#2f78bd;text-decoration:underline;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ fl.name }}</span><span style-hover="color:#c0392b" onClick="{{ fl.remove }}" title="Xóa tệp" style="flex:none;cursor:pointer;font-size:14px;line-height:1;color:#9ca3af">×</span></div></sc-for><span style-hover="opacity:.7" onClick="{{ it.addFile }}" style="cursor:pointer;font-size:12px;font-weight:600;color:#2f78bd">+ Tải tệp</span></div><span style-hover="opacity:.7" onClick="{{ it.remove }}" title="Xóa ngành nghề" style="cursor:pointer;font-size:12px;color:#c0392b;padding-top:10px;text-align:right">Xóa</span></div></sc-for>
+</div></div></sc-if>
+<sc-if value="{{ f.hasStatus }}" hint-placeholder-val="{{ false }}"><sc-for list="{{ f.items }}" as="it" hint-placeholder-count="1"><div style="border:1px solid #e5e7eb;border-radius:4px;padding:10px 12px;display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:12px;align-items:center"><div style="display:flex;flex-direction:column;gap:6px;min-width:0"><input type="text" value="{{ it.a }}" onChange="{{ it.onA }}" disabled="{{ f.bypassed }}" placeholder="{{ f.ph }}" style="font:14px Inter,sans-serif;padding:8px 10px;border:1px solid #d5dae1;border-radius:4px;background:#fff;color:#1f2937;box-sizing:border-box;width:100%;min-width:0;flex:1"><span style-hover="opacity:.7" onClick="{{ it.remove }}" style="flex:none;cursor:pointer;font-size:12px;color:#c0392b">Xóa</span></div></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span style="font-size:12px;color:#6b7280">Trạng thái đăng ký với BCT</span><div style="display:flex;gap:6px;flex-wrap:wrap"><sc-for list="{{ it.stOpts }}" as="o" hint-placeholder-count="3"><div onClick="{{ o.click }}" style-hover="opacity:.8" style="cursor:pointer;padding:5px 10px;font-size:12px;font-weight:500;border-radius:4px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }}">{{ o.label }}</div></sc-for></div></div><sc-if value="{{ it.showEv }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><span style="font-size:12px;color:#6b7280">Minh chứng đính kèm</span><button style="font:600 12px Inter,sans-serif;padding:5px 10px;border-radius:4px;border:1px solid #d5dae1;background:#fff;color:#1f2937;cursor:pointer" onClick="{{ it.onEv }}">{{ it.evBtn }}</button><span style="font:12px 'JetBrains Mono',monospace;color:#374151">{{ it.evName }}</span></div></sc-if></div></sc-for></sc-if>
+<button style="font:600 13px Inter,sans-serif;padding:8px 14px;border-radius:4px;border:1px solid #d5dae1;background:#fff;color:#1f2937;cursor:pointer;width:fit-content" onClick="{{ f.addItem }}" disabled="{{ f.bypassed }}">{{ f.addLabel }}</button><sc-if value="{{ f.two }}" hint-placeholder-val="{{ false }}"><datalist id="nnkd-dl"><sc-for list="{{ nnkdOpts }}" as="o" hint-placeholder-count="1"><option value="{{ o.label }}"></option></sc-for></datalist></sc-if></div></sc-if>
+                        <sc-if value="{{ f.isChoice }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ f.opts }}" as="o" hint-placeholder-count="2"><div onClick="{{ o.click }}" style-hover="opacity:.8" style="cursor:pointer;padding:7px 12px;font-size:13px;font-weight:500;border-radius:4px;border:1px solid {{ o.bd }};background:{{ o.bg }};color:{{ o.fg }}">{{ o.label }}</div></sc-for></div></sc-if>
+                      </div>
+                      <div style="flex:{{ f.statusFlex }};display:flex;flex-direction:{{ f.statusDir }};gap:4px 12px;align-items:{{ f.statusAlign }};padding-top:4px">
+                        <sc-if value="{{ f.showTag }}" hint-placeholder-val="{{ false }}"><span style="{{ f.tagStyle }};font-size:11px;font-weight:600;padding:3px 8px;border-radius:4px">{{ f.statusText }}</span></sc-if>
+                        <sc-if value="{{ f.bypassed }}" hint-placeholder-val="{{ false }}"><span style-hover="opacity:.7" onClick="{{ f.clear }}" style="cursor:pointer;font-size:12px;color:#2f78bd">Bỏ ngoại lệ</span></sc-if>
+                        <sc-if value="{{ f.canBypass }}" hint-placeholder-val="{{ false }}"><span style-hover="opacity:.7" onClick="{{ f.toggleOpen }}" style="cursor:pointer;font-size:12px;color:#2f78bd">{{ f.openText }}</span></sc-if>
+                      </div>
+                    </div>
+                    <sc-if value="{{ f.showStrip }}" hint-placeholder-val="{{ false }}">
+                      <div style="padding:12px 16px;background:#f9fafb;border-bottom:1px solid #eef0f2;display:flex;flex-direction:column;gap:10px">
+                        <div><div style="font-size:12px;font-weight:600;margin-bottom:8px">Chọn trường hợp ngoại lệ <span style="color:#dc2626">*</span></div><div style="display:flex;gap:10px;flex-wrap:wrap"><sc-for list="{{ f.bpOpts }}" as="b" hint-placeholder-count="2"><div onClick="{{ b.click }}" style-hover="opacity:.8" style="cursor:pointer;flex:1 1 220px;display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:4px;border:1px solid {{ b.bd2 }};background:#fff"><div style="flex:none;width:14px;height:14px;margin-top:2px;border-radius:50%;border:2px solid {{ b.bd2 }};box-sizing:border-box;background:{{ b.dot }}"></div><div><div style="font-size:13px;font-weight:600">{{ b.label }}</div><div style="font-size:12px;color:#6b7280;margin-top:2px;line-height:1.4">{{ b.desc }}</div></div></div></sc-for></div></div>
+                        <sc-if value="{{ f.bypassed }}" hint-placeholder-val="{{ false }}">
+                          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;align-items:center"><input type="text" value="{{ f.reason }}" onChange="{{ f.onReason }}" placeholder="Lý do / ghi chú (không bắt buộc)" style="font:14px Inter,sans-serif;padding:8px 10px;border:1px solid #d5dae1;border-radius:4px;background:#fff;color:#1f2937;width:100%;box-sizing:border-box"><div style="display:flex;gap:10px;align-items:center"><button style="font:600 13px Inter,sans-serif;padding:8px 14px;border-radius:4px;border:1px solid #d5dae1;background:#fff;color:#1f2937;cursor:pointer" onClick="{{ f.onEv }}">{{ f.evBtn }}</button><span style="font-size:12px;color:#6b7280">Minh chứng: không bắt buộc</span></div></div>
+                          <div style="font:12px 'JetBrains Mono',monospace;color:#374151">{{ f.evName }}</div>
+                        </sc-if>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+      <div style="flex:none;border-top:1px solid #e5e7eb;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;background:#fff">
+        <div style="font-size:13px;line-height:1.4;color:#374151">{{ footMsg }}</div>
+        <button style="font:600 14px Inter,sans-serif;padding:10px 18px;border-radius:4px;border:0;background:#2f78bd;color:#fff;cursor:pointer;opacity:{{ submitOpacity }}" onClick="{{ submit }}" disabled="{{ cantSubmit }}">{{ submitText }}</button>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ dlg }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(17,24,39,.5);display:flex;align-items:center;justify-content:center;padding:24px;z-index:10">
+      <div style="background:#fff;border-radius:4px;width:620px;max-width:100%;max-height:100%;display:flex;flex-direction:column;box-shadow:0 8px 24px rgba(0,0,0,.18)">
+        <div style="padding:18px 20px;border-bottom:1px solid #e5e7eb"><div style="font-size:17px;font-weight:600">Chuyển KSNB theo luồng ngoại lệ</div><div style="font-size:13px;margin-top:4px;color:#6b7280">{{ bypassCount }} trường chưa thu thập đủ sẽ chuyển thẩm định với trạng thái Bypass.</div></div>
+        <div style="padding:16px 20px;overflow:auto;display:flex;flex-direction:column;gap:14px">
+          <div><div style="font-size:12px;font-weight:600;margin-bottom:8px">Trường hợp ngoại lệ của Merchant <span style="color:#dc2626">*</span></div><div style="display:flex;gap:6px"><sc-for list="{{ caseOpts }}" as="c" hint-placeholder-count="2"><div onClick="{{ c.click }}" style-hover="opacity:.8" style="cursor:pointer;padding:7px 14px;font-size:13px;font-weight:500;border-radius:4px;border:1px solid {{ c.bd }};background:{{ c.bg }};color:{{ c.fg }}">{{ c.label }}</div></sc-for></div></div>
+          <div style="border:1px solid #e5e7eb;border-radius:4px"><sc-for list="{{ bypassList }}" as="b" hint-placeholder-count="3"><div style="display:flex;justify-content:space-between;gap:16px;padding:9px 12px;border-bottom:1px solid #eef0f2;font-size:13px"><span>{{ b.label }}</span><span style="white-space:nowrap;color:#6b7280">{{ b.type }} · {{ b.ev }}</span></div></sc-for></div>
+        </div>
+        <div style="padding:14px 20px;border-top:1px solid #e5e7eb;display:flex;gap:10px"><button style="font:600 14px Inter,sans-serif;padding:10px 18px;border-radius:4px;border:0;background:#2f78bd;color:#fff;cursor:pointer;opacity:{{ confirmOpacity }}" onClick="{{ confirm }}" disabled="{{ noCase }}">Xác nhận chuyển KSNB</button><button style="font:600 13px Inter,sans-serif;padding:8px 14px;border-radius:4px;border:1px solid #d5dae1;background:#fff;color:#1f2937;cursor:pointer;padding:10px 18px" onClick="{{ closeDlg }}">Quay lại</button></div>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ viewFile }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeView }}" style="position:fixed;inset:0;background:rgba(17,24,39,.5);display:flex;align-items:center;justify-content:center;padding:24px;z-index:12"><div style="background:#fff;border-radius:4px;width:560px;max-width:100%;box-shadow:0 8px 24px rgba(0,0,0,.18)"><div style="padding:14px 20px;border-bottom:1px solid #e5e7eb;font:500 13px 'JetBrains Mono',monospace">{{ viewFile }}</div><div style="height:280px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:13px">Xem trước tệp</div><div style="padding:12px 20px;border-top:1px solid #e5e7eb"><button style="font:600 12px Inter,sans-serif;padding:5px 10px;border-radius:4px;border:1px solid #d5dae1;background:#fff;color:#1f2937;cursor:pointer" onClick="{{ closeView }}">Đóng</button></div></div></div></sc-if>
+  <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(17,24,39,.5);display:flex;align-items:center;justify-content:center;padding:24px;z-index:11">
+      <div style="background:#fff;border-radius:4px;width:460px;max-width:100%;padding:28px;display:flex;flex-direction:column;gap:12px;box-shadow:0 8px 24px rgba(0,0,0,.18)">
+        <div style="font-size:20px;font-weight:600">Đã chuyển sang KSNB thẩm định</div>
+        <div style="font-size:14px;line-height:1.5;color:#374151">{{ sentMsg }}</div>
+        <button style="font:600 14px Inter,sans-serif;padding:10px 18px;border-radius:4px;border:0;background:#2f78bd;color:#fff;cursor:pointer;width:fit-content" onClick="{{ closeSent }}">Đóng</button>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  mainRef = React.createRef();
+  state = { viewFile: null, v: { i9: [{ a: '6619 - Hoạt động hỗ trợ dịch vụ tài chính chưa được phân vào đâu', c: 'Cung ứng dịch vụ trung gian thanh toán, cung ứng dịch vụ thanh toán không qua tài khoản thanh toán của khách hàng; cung ứng dịch vụ tiền di động', b: 'Phát triển phần mềm thanh toán', cond: true, files: [{ name: 'gp-con-1-1.pdf', size: '0.8 MB', date: '13/10/2026' }] }, { a: '4791 - Bán lẻ theo yêu cầu đặt hàng qua bưu điện hoặc internet', b: '' }] }, bp: {}, rs: {}, ev: {}, open: {}, dlg: false, mcase: null, sent: false, active: 'a' };
+  S = (() => {
+    const T = (id, l, o = {}) => ({ id, l, k: 'text', req: true, ...o });
+    const D = (id, l, o = {}) => ({ id, l, k: 'date', req: true, ...o });
+    const C = (id, l, opts, o = {}) => ({ id, l, k: 'choice', opts, req: true, ...o });
+    const L = (id, l, ph, o = {}) => ({ id, l, k: 'list', ph, req: true, ...o });
+    const Fl = (id, l, o = {}) => ({ id, l, k: 'file', req: true, ...o });
+    const person = (p, g, w, cccd) => [
+      T(p + 'n', 'Họ và tên', { g, when: w }), D(p + 'd', 'Ngày, tháng, năm sinh', { g, when: w }),
+      T(p + 'c', cccd, { g, when: w }), T(p + 'q', 'Quốc tịch', { g, when: w }),
+      T(p + 'j', 'Nghề nghiệp, chức vụ', { g, when: w }),
+      T(p + 'a', 'Địa chỉ đăng ký hộ khẩu thường trú (người Việt Nam) / Địa chỉ cư trú ở nước ngoài (người nước ngoài)', { g, when: w }),
+      T(p + 'b', 'Địa chỉ nơi ở hiện tại (người Việt Nam) / Địa chỉ đăng ký cư trú tại Việt Nam (người nước ngoài)', { g, when: w })];
+    const cccd = 'Số CCCD / Số định danh cá nhân / Hộ chiếu / Thị thực nhập cảnh, ngày cấp và nơi cấp';
+    return [
+      { id: 'a', t: 'I. Thông tin chung', note: 'Mục 7, 9, 10', f: [
+        L('i9', 'Ngành nghề kinh doanh', 'Mã NNKD cấp 4 - Tên NNKD cấp 4', { two: true, ph2: 'Tên chi tiết (không bắt buộc)', hint: 'Có thể có nhiều ngành nghề. Sale được sửa, xóa, thêm.' }),
+        L('iw', 'Website / Ứng dụng / Nền tảng', 'Link website, ứng dụng hoặc tên nền tảng', { req: false, status: true, hint: 'Có thể có nhiều. Sale được sửa, xóa, thêm.' }),
+        C('i7', 'Phương thức cung cấp: Hợp đồng/thỏa thuận mẫu giữa người bán và người mua', ['Có áp dụng', 'Không áp dụng']),
+        C('i10', 'Quy mô doanh nghiệp', ['Siêu nhỏ', 'Nhỏ', 'Vừa'], { hint: 'Theo số lao động có BHXH bình quân, doanh thu năm hoặc vốn, theo từng nhóm ngành.' })] },
+      { id: 'b', t: 'III. Người thành lập', note: 'Chọn loại người thành lập', f: [
+        C('t', 'Loại người thành lập', ['Tổ chức', 'Cá nhân', 'Đã thoái vốn', 'Đã mất / không tồn tại', 'Không xác định được']),
+        T('o1', 'Tên giao dịch đầy đủ', { g: '1. Người thành lập là tổ chức', when: ['t', 'Tổ chức'] }),
+        T('o2', 'Tên viết tắt', { req: false, g: '1. Người thành lập là tổ chức', when: ['t', 'Tổ chức'] }),
+        T('o3', 'Địa chỉ trụ sở chính', { g: '1. Người thành lập là tổ chức', when: ['t', 'Tổ chức'] }),
+        T('o4', 'Số giấy phép thành lập / MST / Mã số DN', { g: '1. Người thành lập là tổ chức', when: ['t', 'Tổ chức'] }),
+        T('o5', 'Số điện thoại', { g: '1. Người thành lập là tổ chức', when: ['t', 'Tổ chức'] }),
+        T('o6', 'Email', { req: false, g: '1. Người thành lập là tổ chức', when: ['t', 'Tổ chức'] }),
+        T('o7', 'Ngành nghề, lĩnh vực kinh doanh', { g: '1. Người thành lập là tổ chức', when: ['t', 'Tổ chức'] }),
+        T('p1', 'Họ và tên', { g: '2. Người thành lập là cá nhân', when: ['t', 'Cá nhân'] }),
+        D('p2', 'Ngày, tháng, năm sinh', { g: '2. Người thành lập là cá nhân', when: ['t', 'Cá nhân'] }),
+        T('p3', 'Số Hộ chiếu, ngày cấp và nơi cấp', { g: '2. Người thành lập là cá nhân', when: ['t', 'Cá nhân'] }),
+        T('p4', 'Quốc tịch', { g: '2. Người thành lập là cá nhân', when: ['t', 'Cá nhân'] }),
+        T('p5', 'Địa chỉ đăng ký hộ khẩu thường trú / Địa chỉ cư trú ở nước ngoài', { g: '2. Người thành lập là cá nhân', when: ['t', 'Cá nhân'] }),
+        T('p6', 'Địa chỉ nơi ở hiện tại / Địa chỉ đăng ký cư trú tại Việt Nam', { g: '2. Người thành lập là cá nhân', when: ['t', 'Cá nhân'] }),
+        T('d1', 'Tên người thành lập (nếu có)', { req: false, g: '3. Đã thoái vốn', when: ['t', 'Đã thoái vốn'] }),
+        T('m1', 'Tên người thành lập (nếu có)', { req: false, g: '4. Đã mất / không tồn tại', when: ['t', 'Đã mất / không tồn tại'] }),
+        T('u1', 'Lý do', { g: '5. Không thể có đủ thông tin / không xác định được', when: ['t', 'Không xác định được'] })] },
+      { id: 'c', t: 'V. Kế toán trưởng / người phụ trách kế toán', note: 'Chọn Cá nhân hoặc Tổ chức', f: [
+        C('kt', 'Đối tượng', ['Cá nhân', 'Tổ chức']),
+        ...person('k', 'Cá nhân', ['kt', 'Cá nhân'], cccd),
+        T('ko1', 'Tên doanh nghiệp', { g: 'Tổ chức', when: ['kt', 'Tổ chức'] }),
+        T('ko2', 'Địa chỉ trụ sở chính', { g: 'Tổ chức', when: ['kt', 'Tổ chức'] }),
+        T('ko3', 'Số giấy phép thành lập / mã số thuế / mã số doanh nghiệp', { g: 'Tổ chức', when: ['kt', 'Tổ chức'] }),
+        T('ko4', 'Người đại diện theo pháp luật', { g: 'Tổ chức', when: ['kt', 'Tổ chức'] }),
+        T('ko5', 'Chức vụ', { req: false, g: 'Tổ chức', when: ['kt', 'Tổ chức'] }),
+        T('ko6', 'Ngành nghề kinh doanh', { req: false, g: 'Tổ chức', when: ['kt', 'Tổ chức'] })] },
+      { id: 'd', t: 'VI. Chủ sở hữu hưởng lợi', note: 'Chủ sở hữu 1 và 2', f: [C('bo', 'Chủ sở hữu hưởng lợi', ['Không xác định được / không có', 'Có chủ sở hữu hưởng lợi']), ...person('b1', 'Chủ sở hữu hưởng lợi số 1', ['bo', 'Có chủ sở hữu hưởng lợi'], cccd), ...person('b2', 'Chủ sở hữu hưởng lợi số 2', ['bo', 'Có chủ sở hữu hưởng lợi'], cccd)] },
+      { id: 'e', t: 'VII. Thỏa thuận pháp lý', note: 'Khách hàng có tham gia thỏa thuận pháp lý', f: [
+        C('l', 'Loại thỏa thuận', ['Ủy thác', 'Ủy quyền', 'Khác', 'Không tham gia']),
+        C('lr', 'Bên nhận ủy thác là', ['Tổ chức', 'Cá nhân'], { when: ['l', ['Ủy thác', 'Ủy quyền', 'Khác']] }),
+        T('r1', 'Tên giao dịch đầy đủ', { g: 'Bên nhận ủy thác là tổ chức', when: ['lr', 'Tổ chức'] }),
+        T('r2', 'Tên viết tắt', { req: false, g: 'Bên nhận ủy thác là tổ chức', when: ['lr', 'Tổ chức'] }),
+        T('r3', 'Địa chỉ trụ sở chính', { g: 'Bên nhận ủy thác là tổ chức', when: ['lr', 'Tổ chức'] }),
+        T('r4', 'Thông tin đăng ký/cấp phép do cơ quan nước ngoài cấp', { hint: 'Số giấy phép thành lập / MST / mã số DN, ngày cấp, nơi cấp.', g: 'Bên nhận ủy thác là tổ chức', when: ['lr', 'Tổ chức'] }),
+        T('r5', 'Họ và tên', { g: 'Bên nhận ủy thác là cá nhân', when: ['lr', 'Cá nhân'] }),
+        T('r6', 'Địa chỉ quốc tịch', { hint: 'Địa chỉ cư trú ở nước ngoài.', g: 'Bên nhận ủy thác là cá nhân', when: ['lr', 'Cá nhân'] }),
+        T('r7', 'Cơ cấu của ủy thác', { hint: 'Baokim vẽ sơ đồ từ văn bản thành lập thỏa thuận pháp lý.', when: ['l', ['Ủy thác', 'Ủy quyền', 'Khác']] }),
+        C('ls', 'Bên ủy thác là', ['Tổ chức', 'Cá nhân'], { when: ['l', ['Ủy thác', 'Ủy quyền', 'Khác']] }),
+        T('s1', 'Tên giao dịch đầy đủ', { g: 'Bên ủy thác là tổ chức', when: ['ls', 'Tổ chức'] }),
+        T('s2', 'Số định danh', { hint: 'Số giấy phép thành lập / MST / mã số DN, ngày cấp, nơi cấp.', g: 'Bên ủy thác là tổ chức', when: ['ls', 'Tổ chức'] }),
+        T('s3', 'Họ và tên', { g: 'Bên ủy thác là cá nhân', when: ['ls', 'Cá nhân'] }),
+        T('s4', 'Địa chỉ quốc tịch', { hint: 'Địa chỉ cư trú ở nước ngoài.', g: 'Bên ủy thác là cá nhân', when: ['ls', 'Cá nhân'] })] },
+      { id: 'f', t: 'VIII. Hồ sơ đính kèm', note: 'Mục 3, 4, 5, 7, 8, 9', f: [
+        Fl('h3', 'Điều lệ công ty'),
+        Fl('h4', 'Quyết định bổ nhiệm hoặc Hợp đồng thuê Giám đốc (Tổng Giám đốc) hoặc tài liệu tương đương'),
+        Fl('h5', 'Quyết định bổ nhiệm hoặc Hợp đồng thuê Kế toán trưởng / người phụ trách kế toán / bên thứ ba làm kế toán', { hint: 'Không bắt buộc thu thập nếu Quy mô doanh nghiệp là Siêu nhỏ.', optIfMicro: true }),
+        Fl('h7', 'CMND/CCCD/Hộ chiếu của chủ sở hữu hưởng lợi (nếu có)'),
+        Fl('h8', 'Văn bản ủy quyền của người đại diện theo pháp luật (khi người ký không phải người đại diện theo pháp luật)'),
+        Fl('h9', 'Thỏa thuận pháp lý (nếu có)')] }
+    ];
+  })();
+  fieldsOf(s) {
+    const v = this.state.v, out = [];
+    s.f.forEach(f => {
+      if (f.when) { const cur = v[f.when[0]], w = f.when[1]; if (!(Array.isArray(w) ? w.includes(cur) : cur === w)) return; }
+      out.push(f.optIfMicro && v.i10 === 'Siêu nhỏ' ? { ...f, req: false } : f);
+    });
+    return out;
+  }
+  st(f) { const s = this.state; if (s.bp[f.id]) return 'bypass'; const x = s.v[f.id]; return (Array.isArray(x) ? x.some(i => ((i && i.a) || '').trim()) : x) ? 'done' : 'empty'; }
+  setBp(id, t) { this.setState(s => ({ bp: { ...s.bp, [id]: t }, open: { ...s.open, [id]: true } })); }
+  bulk(t) {
+    const bp = { ...this.state.bp };
+    this.S.forEach(s => this.fieldsOf(s).forEach(f => { if (f.req && this.st(f) === 'empty') bp[f.id] = t; }));
+    this.setState({ bp });
+  }
+  renderVals() {
+    const s = this.state, mk = (label, on, click) => ({ label, click, bg: on ? '#2f78bd' : '#fff', fg: on ? '#fff' : '#374151', bd: on ? '#2f78bd' : '#d5dae1' });
+    let total = 0, done = 0, byp = 0, emp = 0; const bl = [];
+    const nnkdOpts = window.NNKD || [];
+    const sections = this.S.map(sec => {
+      const vis = this.fieldsOf(sec); let prev = null, sd = 0, st_ = 0; let n = 0;
+      const fields = vis.map(f => {
+        const status = this.st(f), by = status === 'bypass';
+        if (f.req) { total++; st_++; if (status === 'done') { done++; sd++; } else if (by) { byp++; sd++; } else emp++; }
+        if (by) bl.push({ label: f.l, type: s.bp[f.id], ev: (f.k === 'file' ? s.v[f.id] : s.ev[f.id]) ? 'Có minh chứng' : 'Không có minh chứng' });
+        const showGroup = !!f.g && f.g !== prev; prev = f.g || null;
+        const open = !!s.open[f.id] && status !== 'done';
+        const bpOpt = t => mk(t, s.bp[f.id] === t, () => this.setBp(f.id, t));
+                return {
+          label: f.l, hint: f.hint || '', req: f.req, group: f.g, showGroup,
+          isText: f.k === 'text', isDate: f.k === 'date', isFile: f.k === 'file', isChoice: f.k === 'choice', isList: f.k === 'list', labelBasis: f.k === 'list' ? '100%' : '180px', inputBasis: f.k === 'list' ? '100%' : '260px', statusFlex: f.k === 'list' ? '1 1 100%' : '0 0 150px', statusDir: f.k === 'list' ? 'row' : 'column', statusAlign: f.k === 'list' ? 'center' : 'flex-start',
+          items: f.k === 'list' ? (s.v[f.id] && s.v[f.id].length ? s.v[f.id] : [{ a: '', b: '' }]).map((it, i) => { const st = it.st || 'Chưa thực hiện'; const up = patch => this.setState(x => { const arr = (x.v[f.id] && x.v[f.id].length ? x.v[f.id] : [{ a: '', b: '' }]).slice(); arr[i] = { ...arr[i], ...patch }; return { v: { ...x.v, [f.id]: arr } }; }); return { a: it.a || '', b: it.b || '', onA: e => { const v = e.target.value, d = (window.NNKD || []).find(x => x.label === v); if (!d) { e.target.value = ''; up({ a: '', c: '' }); } else up({ a: v, c: '' }); }, licOpts: (() => { const d = (window.NNKD || []).find(x => x.label === it.a); return [{ v: '', label: 'Không bắt buộc' }, ...(d ? d.lic : []).map(t => ({ v: t, label: t })), ...(d ? [{ v: 'Khác', label: 'Khác' }] : [])]; })(), onB: e => up({ b: e.target.value }), c: it.c || '', onC: e => up({ c: e.target.value }), remove: () => this.setState(x => { const arr = (x.v[f.id] || []).slice(); arr.splice(i, 1); return { v: { ...x.v, [f.id]: arr } }; }),
+            stOpts: ['Đã thực hiện', 'Đang thực hiện', 'Chưa thực hiện'].map(t => ({ label: t, click: () => up({ st: t }), bd: st === t ? '#2f78bd' : '#d5dae1', bg: st === t ? '#2f78bd' : '#fff', fg: st === t ? '#fff' : '#374151' })),
+            cond: !!it.cond, condOpts: [['Có', true], ['Không', false]].map(([t, val]) => ({ label: t, click: () => up(val ? { cond: true } : { cond: false, files: [] }), bd: !!it.cond === val ? '#2f78bd' : '#d5dae1', bg: !!it.cond === val ? '#2f78bd' : '#fff', fg: !!it.cond === val ? '#fff' : '#374151' })),
+            nFiles: (it.files || []).length, noFiles: !(it.files || []).length,
+            files: (it.files || []).map((fl, j) => ({ name: fl.name, meta: fl.size + ' · ' + fl.date, view: () => this.setState({ viewFile: fl.name }), remove: () => up({ files: (it.files || []).filter((_, k) => k !== j) }) })),
+            addFile: () => { const n = (it.files || []).length; if (n >= 10) return; up({ files: [...(it.files || []), { name: 'gp-con-' + (i + 1) + '-' + (n + 1) + '.pdf', size: (0.8 + n * 0.7).toFixed(1) + ' MB', date: '13/10/2026' }] }); },
+            showEv: st !== 'Chưa thực hiện', evBtn: it.ev ? 'Gỡ minh chứng' : 'Đính kèm minh chứng', evName: it.ev || '', onEv: () => up({ ev: it.ev ? '' : 'minh-chung-dk-bct-' + (i + 1) + '.pdf' }) }; }) : [], two: !!f.two, ph2: f.ph2 || '', hasStatus: !!f.status,
+          addLabel: f.two ? '+ Thêm NNKD cấp 4' : '+ Thêm website / ứng dụng / nền tảng',
+          addItem: () => this.setState(x => ({ v: { ...x.v, [f.id]: [...(x.v[f.id] && x.v[f.id].length ? x.v[f.id] : [{ a: '', b: '' }]), { a: '', b: '', st: '' }] } })),
+          value: s.v[f.id] || '', ph: 'Nhập thông tin', bypassed: by,
+          rowBg: by ? '#f9fafb' : '#fff', inputOpacity: by ? '.45' : '1',
+          onText: e => { const val = e.target.value; this.setState(x => ({ v: { ...x.v, [f.id]: val } })); },
+          onFile: () => this.setState(x => ({ v: { ...x.v, [f.id]: x.v[f.id] ? '' : f.id + '-tai-lieu.pdf' } })),
+          fileBtn: s.v[f.id] ? 'Gỡ tệp' : 'Tải tệp lên',
+          opts: (f.opts || []).map(o => mk(o, s.v[f.id] === o, () => this.setState(x => ({ v: { ...x.v, [f.id]: x.v[f.id] === o ? '' : o } })))),
+          tagStyle: by ? 'background:#fde8e6;color:#c0392b' : status === 'done' ? 'background:#e3f4e8;color:#1e7e34' : 'background:#eef0f2;color:#6b7280',
+          showTag: status !== 'empty', statusText: by ? 'Bypass · ' + s.bp[f.id] : status === 'done' ? 'Đã nhập' : f.req ? 'Chưa nhập' : 'Tùy chọn',
+          clear: () => this.setState(x => { const bp = { ...x.bp }; delete bp[f.id]; return { bp, open: { ...x.open, [f.id]: false } }; }),
+          canBypass: f.req && !by && status === 'empty',
+          toggleOpen: () => this.setState(x => ({ open: { ...x.open, [f.id]: !x.open[f.id] } })),
+          openText: open ? 'Đóng' : 'Đặt ngoại lệ',
+          showStrip: (open || by) && f.req,
+          bpOpts: [['Thu thập sau','Bổ sung thông tin này sau khi chuyển KSNB.'],['Không thể thu thập','Merchant không có hoặc không thể cung cấp thông tin này.']].map(([t,d]) => { const on = s.bp[f.id] === t; return { label: t, desc: d, click: () => this.setBp(f.id, t), bd2: on ? '#2f78bd' : '#d5dae1', dot: on ? '#2f78bd' : '#fff' }; }),
+          reason: s.rs[f.id] || '', onReason: e => { const val = e.target.value; this.setState(x => ({ rs: { ...x.rs, [f.id]: val } })); },
+          onEv: () => this.setState(x => ({ ev: { ...x.ev, [f.id]: x.ev[f.id] ? '' : f.id + '-minh-chung.pdf' } })),
+          evBtn: s.ev[f.id] ? 'Gỡ minh chứng' : 'Đính kèm minh chứng', evName: s.ev[f.id] || ''
+        };
+      });
+      return { domId: 'sec-' + sec.id, title: sec.t, note: sec.note, fields, _sd: sd, _st: st_, id: sec.id };
+    });
+    const navItems = sections.map(x => ({
+      title: x.title, stat: x._st ? x._sd + '/' + x._st : '0 trường', pct: (x._st ? Math.round(100 * x._sd / x._st) : 0) + '%',
+      bg: s.active === x.id ? '#f3f4f6' : '#fff',
+      go: () => { const m = this.mainRef.current, el = document.getElementById(x.domId); if (m && el) m.scrollTop = el.offsetTop - 8; this.setState({ active: x.id }); }
+    }));
+    const ex = byp > 0, ready = emp === 0;
+    const cases = ['Thu thập sau', 'Không thể thu thập'];
+    const mc = s.mcase;
+    return { nnkdOpts,
+      sections, navItems, totalCount: total, doneCount: done, bypassCount: byp, emptyCount: emp, bypassList: bl,
+      flowName: ex ? 'Luồng ngoại lệ' : 'Luồng chính', flowTagStyle: ex ? 'background:#fde8e6;color:#c0392b' : 'background:#e3f4e8;color:#1e7e34', readyText: ready ? 'Sẵn sàng chuyển KSNB' : 'Đang thu thập', readyTagStyle: ready ? 'background:#e3f4e8;color:#1e7e34' : 'background:#9ca3af;color:#fff', submitOpacity: ready ? 1 : 0.45, confirmOpacity: mc ? 1 : 0.45,
+      footMsg: !ready ? 'Còn ' + emp + ' trường chưa nhập và chưa đặt Bypass. Nhập hoặc đặt ngoại lệ để chuyển KSNB.'
+        : ex ? byp + ' trường Bypass. Hồ sơ sẽ chuyển KSNB theo luồng ngoại lệ.' : 'Đã thu thập đủ các trường bắt buộc. Hồ sơ chuyển KSNB theo luồng chính.',
+      cantSubmit: !ready, submitText: ex ? 'Chuyển KSNB (luồng ngoại lệ)' : 'Chuyển KSNB thẩm định',
+      submit: () => ex ? this.setState({ dlg: true, mcase: s.mcase || bl[0].type }) : this.setState({ sent: true }),
+      dlg: s.dlg, closeDlg: () => this.setState({ dlg: false }),
+      caseOpts: cases.map(c => mk(c, mc === c, () => this.setState({ mcase: c }))), noCase: !mc,
+      confirm: () => this.setState({ dlg: false, sent: true }),
+      viewFile: s.viewFile, closeView: () => this.setState({ viewFile: null }), sent: s.sent, closeSent: () => this.setState({ sent: false }),
+      sentMsg: ex ? 'Luồng ngoại lệ · ' + (mc || '') + ' · ' + byp + ' trường Bypass.' : 'Luồng chính · thu thập đủ các trường bắt buộc.',
+      bulkLater: () => this.bulk('Thu thập sau'), bulkNo: () => this.bulk('Không thể thu thập'), mainRef: this.mainRef
+    };
+  }
+}
+
+</script>
+</body>
+</html>
